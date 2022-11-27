@@ -31,10 +31,21 @@
 
 \maketitle
 
-\section{Introduction}
+\section{What is Group Theory?}
 
+In order to connect the ideas of group theory to the real world, we must first understand what a group is 
+in relation to linear algebra. A group is a set of elements that are closed under a binary operation,
+similarly to how vector spaces are closed under addition and scalar multiplication, but with the 
+generalization that groups need not be composed of only vectors, but any set of elements.
 
-
-
+\paragraph*{Definition 1:} A \textbf{group} is a set $G$ with a binary operation $\cdot$ 
+such that the following axioms hold:
+% axioms of a group
+\begin{enumerate}
+    \item Closure: For all $a,b \in G$, $a \cdot b \in G$.
+    \item Associativity: For all $a,b,c \in G$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+    \item Identity: There exists an element $e \in G$ such that for all $a \in G$, $a \cdot e = e \cdot a = a$.
+    \item Inverse: For all $a \in G$, there exists an element $a^{-1} \in G$ such that $a \cdot a^{-1} = a^{-1} \cdot a = e$.
+\end{enumerate}
 
 \end{document}
