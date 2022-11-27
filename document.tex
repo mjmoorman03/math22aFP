@@ -54,4 +54,28 @@ of notation are common, such that $G$ referring to a group can be used to refer
 to the group itself or the underlying set, such that a statement like '$a\in G$'
 is meant to convey that $a$ is an element in the underlying set of the group $G$.
 
+\paragraph*{Example:}
+This may seem confusing, but let's make it more concrete with an example: 
+the real numbers together with the operation of addition as we know it. This 
+group would be written $G = \langle \R, +\rangle$. Let's verify our axioms 
+to truly grasp what they mean through this example:
+\begin{enumerate}
+    \item Closure: Let $x,y\in\R$. Because the sum of any two real numbers 
+    is defined as a real number, it must be the case that $x+y\in\R$. 
+    \item Associativity: Let $x,y,z\in\R$. Because addition of real numbers 
+    does not depend on the way in which terms are associated, it is the case 
+    that $(x+y)+z = x+y+z$ and that $x+(y+z)=x+y+z$. Thus, $(x+y)+z=x+(y+z)$. 
+    \item Identity: Let $e = 0$. $0\in\R$, and the addition of 0 to any $x\in\R$
+    is equal to $x$ itself. Thus, for all $x\in\R$, $e+x=x+e=x$. 
+    \item Inverse: For all $x\in\R$, allow $x^{-1}$, the inverse of $x$, to be equal 
+    to $-x$, the negation of $x$. Thus, $-x+x=0$ via simple addition, and $e=0$.
+    Therefore, for any choice of $x\in\R$, there exists an inverse element $x^{-1}$ in $\R$
+    such that $x+ x^{-1} =e$, the identity element. 
+\end{enumerate}
+That's all! We have proven that the real numbers, along with the operation of 
+addition as we know it, form a group! Now that we're a bit more comfortable with 
+what a group is, what does it have to do with linear algebra? Or even anything 
+else at all?
+
+
 \end{document}
