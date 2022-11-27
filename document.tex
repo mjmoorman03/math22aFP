@@ -38,14 +38,20 @@ in relation to linear algebra. A group is a set of elements that are closed unde
 similarly to how vector spaces are closed under addition and scalar multiplication, but with the 
 generalization that groups need not be composed of only vectors, but any set of elements.
 
-\paragraph*{Definition 1:} A \textbf{group} is a set $G$ with a binary operation $\cdot$ 
+\paragraph*{Definition 1:} A \textbf{group} is a set $S$ with a binary operation $\cdot$ 
 such that the following axioms hold:
 % axioms of a group
 \begin{enumerate}
-    \item Closure: For all $a,b \in G$, $a \cdot b \in G$.
-    \item Associativity: For all $a,b,c \in G$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
-    \item Identity: There exists a unique element $e \in G$ such that for all $a \in G$, $a \cdot e = e \cdot a = a$.
-    \item Inverse: For all $a \in G$, there exists a unique element $a^{-1} \in G$ such that $a \cdot a^{-1} = a^{-1} \cdot a = e$.
+    \item Closure: For all $a,b \in S$, $a \cdot b \in S$.
+    \item Associativity: For all $a,b,c \in S$, $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+    \item Identity: There exists a unique element $e \in S$ such that for all $a \in S$, $a \cdot e = e \cdot a = a$.
+    \item Inverse: For all $a \in S$, there exists a unique element $a^{-1} \in S$ such that $a \cdot a^{-1} = a^{-1} \cdot a = e$.
 \end{enumerate}
+Formally, the set $S$ is known as the \textbf{underlying set} of the group, and 
+the binary operation $\cdot$ is known as the \textbf{group operation}. Frequently,
+a group $G$ is denoted by $G = \langle S, \cdot \rangle$. Additionally, abuses 
+of notation are common, such that $G$ referring to a group can be used to refer 
+to the group itself or the underlying set, such that a statement like '$a\in G$'
+is meant to convey that $a$ is an element in the underlying set of the group $G$.
 
 \end{document}
