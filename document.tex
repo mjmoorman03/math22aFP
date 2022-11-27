@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{./images}}
+\usepackage{amsthm}
+\usepackage{marvosym}
+\let\marvosymLightning\Lightning
+\usepackage{amssymb}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\done}{\renewcommand\qedsymbol{$\blacksquare$}}
+\newcommand{\contradiction}{\renewcommand\qedsymbol{$\Lightning$}}
+\usepackage[left=3cm,right=3cm,top=2cm,bottom=2cm]{geometry} % page settings
+\newtheorem{lemma}{Lemma}
+\newtheorem{sublemma}{Lemma}[section]
+% augmented matrix environment
+\newenvironment{amatrix}[1]{%
+  \left[\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right]
+}
+
+\title{\textbf{A Swift Introduction to Group Theory}}
+\author{Cade McManus, Michael Moorman}
+\date{December 2022}
+
+\begin{document}
+
+\maketitle
+
+
+
+
+
+\end{document}
