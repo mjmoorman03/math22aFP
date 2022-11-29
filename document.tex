@@ -150,7 +150,26 @@ $\langle V, K, +, \cdot \rangle$.
 \done  
 \end{proof}
 
+\paragraph*{} So, there is an interesting connection between groups and vector spaces,
+but the similarities and connections do not stop there. We turn to examine 
+\textbf{group homomorphisms}, and their similarities to linear transformations.
+% do I want some sort of basic introduction here?
+
 \section{Group Homomorphisms} 
+
+A \textbf{group homomorphism} is a function $f:G\rightarrow H$ from a group 
+$\langle G, \cdot\rangle$ to a group $\langle H, *\rangle$ such that 
+$f$ preserves the group structure of $G$ and $H$. That is, $f$ must satisfy the following
+property:
+\begin{enumerate}
+    \item $f(g\cdot h) = f(g) * f(h)$
+\end{enumerate}
+where $g,h\in G$.
+From this property, it can be deduced that $f(e_G) = e_H$, where $e_G$ is the
+identity element of $G$ and $e_H$ is the identity element of $H$, and that 
+$f(g^{-1}) = (f(g))^{-1}$. We leave these proofs as an exercise to the reader.
+% or should we prove them here?
+
 
 
 \section{Subgroups}
