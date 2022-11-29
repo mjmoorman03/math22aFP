@@ -128,10 +128,19 @@ an abelian group as simply $\langle V, + \rangle$.
 \done  
 \end{proof}
 
-
 \section{Group Homomorphisms} 
 
 
 \section{Subgroups}
+
+\section{Group actions}
+\paragraph*{} We have seen how vector spaces can satisfy the group axioms, so a natural area of inquiry might be to dig further into the connection between these objects. For example, instead of investigating questions about groups directly, might we instead be able to study some equivalent vector space / linear algebraic object and then leverage the tools that we have been studying this semester to answer our original question. As it turns out this is indeed possible. For the purposes of this paper (and simplicity) feel free to assume the relevant objects are finite linear groups. 
+\paragraph*{} To find the explicit connection we will first introduce the notion of Group Actions in the context of vector spaces. Suppose a real vector space V, and a set of n x n invertible matrices in that space. Notice that this set of transformations satisfies the group axioms under matrix multiplication. We have an identity element in $I_n$, by the definition of invertibility each element has an inverse, and we have shown in class that invertible matrices can be composed associatively to produce another invertible matrix. This is also known as the general linear group of V (GL(V)). A group action maps elements of a group to these transformations.  
+\paragraph*{} We will get to the formal definition, but first some notes for intuition. Notice how the underlying vector space is essentially unchanged after these transformations? While the coordinates of where points were mapped may be different from the original, the underlying space “looks” identical as did in the start. So these transformations acted on the space, but didn’t change how it “looked”. In other words, these transformations are symmetry preserving operations. 
+\paragraph*{} This idea is important, so I’ll a give a more concrete example. Suppose a square, if you were to rotate that square by 90 degrees it would look exactly the same. Its vertices may be in different locations, but they were mapped to each other in a such a way that the structure we care about preserving (square-ness) is kept intact. Also notice that there are many different symmetries that one could exploit to perform a symmetric action. Because of the nature of a “symmetric operation”, whenever one considers the set of symmetric operations on an object, there is an identity element, an inverse, and composition (the underlying structure always looks the same so composing symmetric operations will also produce the same structure, so the net result must also conform to some other symmetric operation). 
+\paragraph*{} Cayleys theorem tells us that every group is isomorphic to a subgroup of a symmetric group., though not a very interesting one \\
+\textbf{Proof:}
+\paragraph*{} The upshot is this: Groups have a deep connection to symmetry, and Group Actions map groups to symmetry groups (the set of automorphisms) of mathematical objects. When we can perform group actions on a vector space V we can often map group elements to subgroups of GL(V), allowing us to use linear algebra.
+
 
 \end{document}
