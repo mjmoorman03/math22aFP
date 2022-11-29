@@ -8,6 +8,8 @@
 \usepackage{marvosym}
 \let\marvosymLightning\Lightning
 \usepackage{amssymb}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[framemethod=TikZ]{mdframed}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
@@ -55,6 +57,12 @@ of notation are common, such that $G$ referring to a group can be used to refer
 to the group itself or the underlying set, such that a statement like '$a\in G$'
 is meant to convey that $a$ is an element in the underlying set of the group $G$.
 
+Additionally, another special type of group we will see is an \textbf{abelian group}.
+
+\textbf{Definition 2:} An \textbf{abelian group} is a group $\langle V, + \rangle$
+such that for all $u,v \in V$, $u+v = v+u$. This means that our group operation 
+is commutative, and the order in which we add elements does not matter.
+
 \paragraph*{Example:}
 This may seem confusing, but let's make it more concrete with an example: 
 the real numbers together with the operation of addition as we know it. This 
@@ -80,27 +88,46 @@ else at all?
 
 \section{Vector Spaces and their Connections to Groups}
 
-\paragraph*{} In class, we defined a vector space as a non-empty set $V$ on which two operations,
-scalar multiplication and vector addition, are defined subject to ten different axioms,
-of which the principles of closure, associativity, identity, and inverse are included 
-for vector addition. For scalar multiplication, these properties are not all explicitly
-included, simply because scalar multiplication is a binary operation, but only involves 
-a single vector, rather than two, as its other input is a scalar, so the ideas of 
-associativity in this case and other similar properties don't have proper analogs.
-\paragraph*{} This definition ought to sound familiar. Just like groups, 
-vector spaces are defined as the combination of a set and operations! Groups, 
-however, are only defined by one operation which you are free to choose. Vector 
-spaces, however, require two operations, scalar multiplication and vector addition specifically.
-But we've already shown that vector addition in vector spaces satisfies our axioms 
-of groups, which means that the set of elements that composes our vector space along 
-with the operation vector addition is a group! This is a very important observation,
-as it means that we can use the properties of groups to prove properties of vector spaces.
+In class, we defined a vector space as a non-empty set $V$ on which two operations,
+scalar multiplication and vector addition, are defined subject to the following axioms,
+where $u,v,w \in V$ and $c,d \in \R$:
+\begin{enumerate}
+    \item $u+v \in V$
+    \item $u+v = v+u$
+    \item $(u+v)+w = u+(v+w)$
+    \item there exists a vector $0_v \in V$ such that $u+0_v = u$
+    \item there exists a vector $-u \in V$ such that $u+(-u) = 0_v$
+    \item $cu\in V$
+    \item $c(u+v) = cu+cv$
+    \item $(c+d)u = cu+du$
+    \item $c(du) = (cd)u$
+    \item $1 \cdot u = u$
+\end{enumerate}
+This is absolutely a correct definition, but we can introduce some additional 
+notation as well as generalize $\R$. We will say that a vector space is a tuple 
+$\langle V, K, +, \cdot \rangle$, where $V$ is a non-empty set, $K$ is a field\footnote[2]{A \textbf{field} refers to a set on which addition, multiplication, subtraction, etc. are defined as we know them to work for the real numbers. This is not incredibly important here, but it is relevant to note that the field $K$ is not necessarily the real numbers.},
+$+$ is our vector addition operator, and $\cdot$ is our scalar multiplication operator,
+and all of the previous axioms hold.
 
-\paragraph*{Definition 3:} As a bit of an aside, because we have also shown that 
-vector addition in our vector space $V$ is commutative as per the axioms 
-of vector spaces, this means that the order in which we perform our group operation on 
-any two given vectors does not matter, so they form an \textbf{abelian group} - 
-defined by the commutativity of the group operation. 
+As we have seen, a group is a set of elements closed under a binary operation, which 
+seems like a less restrictive version of a vector space, especially after having 
+established this notation. It turns out that this is indeed the case, and that 
+given our vector field $\langle V, K, +, \cdot \rangle$, we can always define 
+an abelian group as simply $\langle V, + \rangle$.
+
+\begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
+  \textbf{Theorem 1:} Let $\langle V, K, +, \cdot \rangle$ be a vector space. Then,
+  $\langle V, + \rangle$ is an abelian group.
+\end{mdframed}
+
+\begin{proof}
+    In order to prove this theorem, we will verify all of the axioms of a group
+    given that $V$ is a non-empty set of a vector space, and $+$ is the vector 
+    addition operator from that same vector space. 
+
+\done  
+\end{proof}
+
 
 \section{Group Homomorphisms} 
 
