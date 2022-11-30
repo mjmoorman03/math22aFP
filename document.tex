@@ -139,7 +139,8 @@ an abelian group as simply $\langle V, + \rangle$.
       there exists a vector $-u \in V$ such that $u+(-u) = 0_v$ and we are using the same set $V$ from our vector space and the
       same binary operator, this property holds for our group as well.
     \end{enumerate}
-Additionally, this is also an abelian group, which requires that our group operation 
+
+Additionally, this is an abelian group, which requires that our group operation 
 is commutative. We know that this is the case because axiom 2 of a vector space states that
 $u+v = v+u$ for all $u,v \in V$, where $V$ is our underlying set and $+$ is our group operator.
 Because we have shown that each of our axioms for a group holds given a non-empty 
@@ -155,9 +156,9 @@ but the similarities and connections do not stop there. We turn to examine
 \textbf{group homomorphisms}, and their similarities to linear transformations.
 % do I want some sort of basic introduction here?
 
-\section{Group Homomorphisms} 
+\section{Group Homomorphisms and Isomorphisms} 
 
-A \textbf{group homomorphism} is a function $f:G\rightarrow H$ from a group 
+\paragraph{Definition 3:} A \textbf{group homomorphism} is a function $f:G\rightarrow H$ from a group 
 $\langle G, \cdot\rangle$ to a group $\langle H, *\rangle$ such that 
 $f$ preserves the group structure of $G$ and $H$. That is, $f$ must satisfy the following
 property:
@@ -168,55 +169,73 @@ where $g,h\in G$.
 From this property, it can be deduced that $f(e_G) = e_H$, where $e_G$ is the
 identity element of $G$ and $e_H$ is the identity element of $H$, and that 
 $f(g^{-1}) = (f(g))^{-1}$. We leave these proofs as an exercise to the reader.
-% or should we prove them here?
 
+This property may look familiar, and it should. This is exactly how we define a linear 
+transformation with respect to vector addition. In fact, we can generalize this 
+as follows. 
 
+\begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
+  \textbf{Theorem 2:} Let $\langle V, K, +, \cdot \rangle$ be a vector space, and let
+  $\langle W, L, \oplus, \odot \rangle$ be a vector space. Then, a linear transformation
+  $T:V\rightarrow W$ is a group homomorphism from $\langle V, + \rangle$ to $\langle W, \oplus \rangle$.
+\end{mdframed}
+\begin{proof}
+One of the two axioms\footnote[3]{In class, we present this axiom as $T(u+v) = T(u) + T(v)$, but it can really be written as $T(u+v) = T(u) \oplus T(v)$, as our binary operator for vector addition may be different in our $W$ vector space.} of 
+a linear transformation is that $T(u+v) = T(u) \oplus T(v)$ for all $u,v \in V$, when $T$
+maps $V$ to $W$. Well, because our binary operator for our group $\langle V, + \rangle$ is $+$, and our binary operator for our group $\langle W, \oplus \rangle$ is $\oplus$, 
+our sole property for a group homomorphism is satisfied simply by this one axiom 
+of our linear transformation, that $T(u+v) = T(u) \oplus T(v)$ for all $u,v \in V$.
+\done 
+\end{proof}
+Thus, group homomorphisms are generalizations of linear transformations between 
+vector spaces, just like 
+how groups are generalizations of vector spaces. We're not done just yet, though.
+We now introduce the concept of a \textbf{group isomorphism}.
 
-\section{Subgroups}
+\paragraph*{Definition 4:} A \textbf{group isomorphism} is a special type of group homomorphism
+that is bijective. That is, a group isomorphism is a function $f:G\rightarrow H$ from a group
+$\langle G, \cdot\rangle$ to a group $\langle H, *\rangle$ such that there exists 
+a function $g:H\rightarrow G$ such that $f(g(h)) = h$ and $g(f(g)) = g$ for all $h\in H$.
+$g$ is known as the \textbf{inverse homomorphism} of $f$. So, a group isomorphism is a
+group homomorphism that has an inverse homomorphism.
 
-\section{Group actions}
-\paragraph*{} We have seen how vector spaces can satisfy the group axioms, so a 
-natural area of inquiry might be to dig further into the connection between these
- objects. For example, instead of investigating questions about groups directly, 
- might we instead be able to study some equivalent vector space / linear algebraic 
- object and then leverage the tools that we have been studying this semester to
-answer our original question. As it turns out this is indeed possible. For the 
-purposes of this paper (and simplicity) feel free to assume the relevant objects 
-are finite linear groups. 
-\paragraph*{} To find the explicit connection we will first introduce the notion
- of Group Actions in the context of vector spaces. Suppose a real vector space V,
-  and a set of n x n invertible matrices in that space. Notice that this set of
-  transformations satisfies the group axioms under matrix multiplication. We have
- an identity element in $I_n$, by the definition of invertibility each element
-  has an inverse, and we have shown in class that invertible matrices can be 
-  composed associatively to produce another invertible matrix. This is also known 
-  as the general linear group of V (GL(V)). A group action maps elements of a 
-  group to these transformations.  
-\paragraph*{} We will get to the formal definition, but first some notes for
-intuition. Notice how the underlying vector space is essentially unchanged after 
-these transformations? While the coordinates of where points were mapped may be 
-different from the original, the underlying space “looks” identical as did in 
-the start. So these transformations acted on the space, but didn't change how it 
-“looked”. In other words, these transformations are symmetry preserving operations. 
-\paragraph*{} This idea is important, so I'll a give a more concrete example. 
-Suppose a square, if you were to rotate that square by 90 degrees it would look 
-exactly the same. Its vertices may be in different locations, but they were mapped 
-to each other in a such a way that the structure we care about preserving 
-(square-ness) is kept intact. Also notice that there are many different symmetries 
-that one could exploit to perform a symmetric action. Because of the nature of 
-a “symmetric operation”, whenever one considers the set of symmetric operations 
-on an object, there is an identity element, an inverse, and composition 
-(the underlying structure always looks the same so composing symmetric operations 
-will also produce the same structure, so the net result must also conform to some 
-other symmetric operation). 
-\paragraph*{} Cayleys theorem tells us that every group is isomorphic to a 
-subgroup of a symmetric group., though not a very interesting one \\
-\textbf{Proof:}
-\paragraph*{} The upshot is this: Groups have a deep connection to symmetry, 
-and Group Actions map groups to symmetry groups (the set of automorphisms) of 
-mathematical objects. When we can perform group actions on a vector space V we 
-can often map group elements to subgroups of GL(V), allowing us to use linear 
-algebra.
+We can generalize this to linear transformations quite nicely as well.
+\begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
+  \textbf{Theorem 3:} Let $\langle V, K, +, \cdot \rangle$ and 
+  $\langle W, L, \oplus, \odot \rangle$ be vector spaces. Then, a linear transformation
+  $T:V\rightarrow W$ between vector spaces is also a group isomorphism from $\langle V, + \rangle$ to $\langle W, \oplus \rangle$ if and only if $T$ is bijective.
+\end{mdframed}
 
+\begin{proof}
+  We will prove this by showing that if $T$ is bijective, then $T$ is a group isomorphism, and that if $T$ is a group isomorphism, then $T$ is bijective.
+  \begin{enumerate}
+    \item If $T$ is bijective, then $T$ is a group isomorphism. 
+    Let $f:V\rightarrow W$ be the function $f(v) = T(v)$ for all $v\in V$. 
+    Then, $f$ is a group homomorphism from $\langle V, + \rangle$ to 
+    $\langle W, \oplus \rangle$ by Theorem 2. Let $g:W\rightarrow V$ be the 
+    function $g(w) = T^{-1}(w)$ for all $w\in W$. We know this 
+    inverse exists because $T$ is bijective. Then, $g$ is the inverse 
+    homomorphism of $f$ because $f(g(w)) = T(T^{-1}(w)) = w$ and 
+    $g(f(g)) = T^{-1}(T(g)) = g$ for all $w\in W$. Thus, $T$ is a group isomorphism.
+
+    \item If $T$ is a group isomorphism, then $T$ is bijective. 
+    Let $f:V\rightarrow W$ be the function $f(v) = T(v)$ for all $v\in V$. 
+    Then, $f$ is a group homomorphism from $\langle V, + \rangle$ to 
+    $\langle W, \oplus \rangle$ by Theorem 2. Let $g:W\rightarrow V$ be the 
+    function $g(w) = T^{-1}(w)$ for all $w\in W$. We know 
+    that this inverse homomorphism exists because $T$ is a group 
+    isomorphism. Then, $g$ is the inverse 
+    homomorphism of $f$ because $f(g(w)) = T(T^{-1}(w)) = w$ and 
+    $g(f(g)) = T^{-1}(T(g)) = g$ for all $w\in W$. Thus, $g$ is a group 
+    homomorphism from $\langle W, \oplus \rangle$ to $\langle V, + \rangle$. 
+    Because $f(g(w)) = w$ for all $w\in W$ and therefore $T(T^{-1}(w)) = w$ for all $w\in W$,
+    we know that $T$ must be bijective\footnote[4]{
+      It suffices to say that $T$ is bijective because it has a defined inverse. The 
+      proof for this statement is elementary, and is left as an exercise for the reader 
+      in order to keep this proof short both short and on topic.
+    } because it has a defined inverse for all $w\in W$.
+  \end{enumerate}
+\done 
+\end{proof}
 
 \end{document}
