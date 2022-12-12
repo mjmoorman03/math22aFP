@@ -1,0 +1,129 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{nty/global//global/global}
+  \entry{aschbacher_2000}{book}{}
+    \name{author}{1}{}{%
+      {{hash=AM}{%
+         family={Aschbacher},
+         familyi={A\bibinitperiod},
+         given={M.},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press}%
+    }
+    \strng{namehash}{AM1}
+    \strng{fullhash}{AM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \verb{doi}
+    \verb 10.1017/CBO9781139175319
+    \endverb
+    \field{edition}{2}
+    \field{series}{Cambridge Studies in Advanced Mathematics}
+    \field{title}{Finite Group Theory}
+    \field{year}{2000}
+  \endentry
+
+  \entry{Foote}{book}{}
+    \name{author}{2}{}{%
+      {{hash=DDS}{%
+         family={Dummit},
+         familyi={D\bibinitperiod},
+         given={David\bibnamedelima S.},
+         giveni={D\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=FRM}{%
+         family={Foote},
+         familyi={F\bibinitperiod},
+         given={Richard\bibnamedelima M.},
+         giveni={R\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+    }
+    \name{editor}{1}{}{%
+      {{hash=BJ}{%
+         family={Battista},
+         familyi={B\bibinitperiod},
+         given={Jennifer},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {John Wiley}%
+      {Sons, Inc.}%
+    }
+    \strng{namehash}{DDSFRM1}
+    \strng{fullhash}{DDSFRM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{edition}{Third Edition}
+    \field{number}{Chapter 1}
+    \field{title}{Abstract Algebra}
+    \field{year}{2004}
+  \endentry
+
+  \entry{wMiller}{book}{}
+    \name{author}{1}{}{%
+      {{hash=MW}{%
+         family={Miller},
+         familyi={M\bibinitperiod},
+         given={Willard},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Academic Press}%
+    }
+    \strng{namehash}{MW1}
+    \strng{fullhash}{MW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{title}{Symmetry Groups and Their Applications}
+    \field{year}{1972}
+  \endentry
+
+  \entry{milneGT}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=MJS}{%
+         family={Milne},
+         familyi={M\bibinitperiod},
+         given={James\bibnamedelima S.},
+         giveni={J\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MJS1}
+    \strng{fullhash}{MJS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{howpublished}{Chapters 1 and 4}
+    \field{note}{Available at www.jmilne.org/math/}
+    \field{title}{Group Theory (v4.00)}
+    \field{year}{2021}
+  \endentry
+\enddatalist
+\endinput

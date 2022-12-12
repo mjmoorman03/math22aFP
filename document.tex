@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[twoside]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{amsmath}
@@ -8,6 +8,10 @@
 \usepackage{marvosym}
 \let\marvosymLightning\Lightning
 \usepackage{amssymb}
+\usepackage{lastpage}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\usepackage{csquotes}
+\usepackage{fancyhdr}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[framemethod=TikZ]{mdframed}
 \newcommand{\R}{\mathbb{R}}
@@ -29,9 +33,37 @@
 \author{Cade McManus, Michael Moorman}
 \date{December 2022}
 
+\addbibresource{refs.bib}
+
 \begin{document}
 
+% fancyhdr package header for authors' names and title
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\textbf{Cade McManus, Michael Moorman}}
+\fancyhead[L]{\textbf{A Swift Introduction to Group Theory}}
+\renewcommand{\headrulewidth}{.7pt}
+\pagenumbering{arabic}
+\fancyfoot[C]{\thepage\ }
+
+
 \maketitle
+
+\section{Introduction}
+
+\paragraph*{} The question ``When will I ever use this?'' is one that is likely 
+most frequently asked in the math classroom and in the context of mathematics 
+as a whole. This question is often difficult to answer because 
+of the abstract nature of mathematics. In the context of Math 22a and linear 
+algebra, this question is partially answered through the final projects 
+at the end of the semester. Then, why is it that we are discussing group theory 
+in this paper,
+another seemingly abstract mathematical concept? The answer is that group theory
+itself is a powerful tool that can be used to study the natural world in a 
+mathematical, but still intuitive way. In this paper, we will explore the
+fundamental ideas of group theory and how they can be applied to the real world,
+both for the sake of understanding the world around us and for the sake of
+exploring math beyond 22a for the sake of math itself. 
 
 \section{What is Group Theory?}
 
@@ -66,7 +98,8 @@ is commutative, and the order in which we add elements does not matter.
 \paragraph*{Example:}
 This may seem confusing, but let's make it more concrete with an example: 
 the real numbers together with the operation of addition as we know it. This 
-group would be written $G = \langle \R, +\rangle$. Let's verify our axioms 
+group would be written $G = \langle \R, +\rangle$, and it is an abelian group. 
+Let's verify our axioms 
 to truly grasp what they mean through this example:
 \begin{enumerate}
     \item Closure: Let $x,y\in\R$. Because the sum of any two real numbers 
@@ -80,9 +113,12 @@ to truly grasp what they mean through this example:
     to $-x$, the negation of $x$. Thus, $-x+x=0$ via simple addition, and $e=0$.
     Therefore, for any choice of $x\in\R$, there exists an inverse element $x^{-1}$ in $\R$
     such that $x+ x^{-1} =e$, the identity element. 
+    \item Commutatvitiy: Let $x,y\in\R$. Because addition of real numbers is commutative,
+    it is the case that $x+y=y+x$. (Note that this case is only necessary to 
+    prove that a group is abelian, not that it is a group.)
 \end{enumerate}
 That's all! We have proven that the real numbers, along with the operation of 
-addition as we know it, form a group! Now that we're a bit more comfortable with 
+addition as we know it, form an abelian group! Now that we're a bit more comfortable with 
 what a group is, what does it have to do with linear algebra? Or even anything 
 else at all?
 
@@ -153,8 +189,56 @@ $\langle V, K, +, \cdot \rangle$.
 
 \paragraph*{} So, there is an interesting connection between groups and vector spaces,
 but the similarities and connections do not stop there. We turn to examine 
-\textbf{group homomorphisms}, and their similarities to linear transformations.
-% do I want some sort of basic introduction here?
+\textbf{subgroups} and their connections to vector subspaces.
+
+\section{Subgroups}
+
+\paragraph{} In similar fashion to the nice connection between groups and vector spaces,
+there also exists an analog of subspaces in the context of groups.
+\paragraph*{Definition 3:} Let $\langle G, \cdot \rangle$ be a group. Let $H$ be a non-empty subset of $G$.
+We say that $H$ is a \textbf{subgroup} of $G$ if $H$ is closed under the group operation $\cdot$
+and contains the identity element of $G$,
+or in other words forms its own group with the binary operation $\cdot$.
+
+\paragraph*{} Recall how we defined a subspace of a vector space in class, in 
+particular that a subspace is a subset of a vector space that is closed under
+scalar multiplication and vector addition and contains the zero vector.
+
+Consider how similarly these are defined, the only difference being that 
+we do not have a notion of scalar multiplication in our group. In fact, these 
+are so similar that there exists a very nice continuation of Theorem 1 with 
+regard to subgroups.
+
+\begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
+  \textbf{Theorem 2:} Let $B=\langle W,K,+,\cdot\rangle$ be a supspace of 
+    vector space $A=\langle V,K,+,\cdot\rangle$. Then, $S=\langle W,+ \rangle$ is a subgroup of
+    $G=\langle V,+ \rangle$.
+\end{mdframed}
+\begin{proof}
+    In order to show this is true, we must show that $W\subseteq V$, that 
+    $W$ is closed under the group operation $+$, and that $0_v\in W$, 
+    all of the conditions necessary for $S$ to be a subgroup of $G$. 
+    \begin{enumerate}
+      \item $W\subseteq V$: This is true because $B$ is a subspace of $A$, 
+      which means by definition that $W$ is a subset of $V$, the underlying set of $A$.
+      \item $W$ is closed under the group operation $+$: This is true because 
+      $B$ is a subspace of $A$, which means by definition that $W$ is closed under
+      the vector addition operator $+$.
+      \item $0_v\in W$: This is true because $B$ is a subspace of $A$, which means by definition that
+        $0_v\in W$, the zero vector of $V$. By the proof of Theorem 2, we know that 
+        this is the identity element of $G$ and therefore of $S$. 
+    \end{enumerate}
+\done     
+\end{proof}
+
+We've already shown that each vector space can be transformed into a group,
+so it naturally followed already that each vector subspace can be transformed
+into a group. However, now we know that these groups are subgroups of the
+group formed from the original vector space! This is a very interesting result,
+and further ties together the concepts of groups and vector spaces. Besides 
+demonstrating these structural similarities, we can turn to examine the similarities between
+functions between groups, known as \textbf{group homomorphisms}, 
+and linear transformations between vector spaces.
 
 \section{Group Homomorphisms and Isomorphisms} 
 
@@ -175,8 +259,8 @@ transformation with respect to vector addition. In fact, we can generalize this
 as follows. 
 
 \begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
-  \textbf{Theorem 2:} Let $\langle V, K, +, \cdot \rangle$ be a vector space, and let
-  $\langle W, L, \oplus, \odot \rangle$ be a vector space. Then, a linear transformation
+  \textbf{Theorem 3:} Let $\langle V, K, +, \cdot \rangle$ and
+  $\langle W, L, \oplus, \odot \rangle$ be vector spaces. Then, a linear transformation
   $T:V\rightarrow W$ is a group homomorphism from $\langle V, + \rangle$ to $\langle W, \oplus \rangle$.
 \end{mdframed}
 \begin{proof}
@@ -201,9 +285,9 @@ group homomorphism that has an inverse homomorphism.
 
 We can generalize this to linear transformations quite nicely as well.
 \begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
-  \textbf{Theorem 3:} Let $\langle V, K, +, \cdot \rangle$ and 
+  \textbf{Theorem 4:} Let $\langle V, K, +, \cdot \rangle$ and 
   $\langle W, L, \oplus, \odot \rangle$ be vector spaces. Then, a linear transformation
-  $T:V\rightarrow W$ between vector spaces is also a group isomorphism from $\langle V, + \rangle$ to $\langle W, \oplus \rangle$ if and only if $T$ is bijective.
+  $T:V\rightarrow W$ between vector spaces is a group isomorphism from $\langle V, + \rangle$ to $\langle W, \oplus \rangle$ if and only if $T$ is bijective.
 \end{mdframed}
 
 \begin{proof}
@@ -212,7 +296,7 @@ We can generalize this to linear transformations quite nicely as well.
     \item If $T$ is bijective, then $T$ is a group isomorphism. 
     Let $f:V\rightarrow W$ be the function $f(v) = T(v)$ for all $v\in V$. 
     Then, $f$ is a group homomorphism from $\langle V, + \rangle$ to 
-    $\langle W, \oplus \rangle$ by Theorem 2. Let $g:W\rightarrow V$ be the 
+    $\langle W, \oplus \rangle$ by Theorem 3. Let $g:W\rightarrow V$ be the 
     function $g(w) = T^{-1}(w)$ for all $w\in W$. We know this 
     inverse exists because $T$ is bijective. Then, $g$ is the inverse 
     homomorphism of $f$ because $f(g(w)) = T(T^{-1}(w)) = w$ and 
@@ -221,7 +305,7 @@ We can generalize this to linear transformations quite nicely as well.
     \item If $T$ is a group isomorphism, then $T$ is bijective. 
     Let $f:V\rightarrow W$ be the function $f(v) = T(v)$ for all $v\in V$. 
     Then, $f$ is a group homomorphism from $\langle V, + \rangle$ to 
-    $\langle W, \oplus \rangle$ by Theorem 2. Let $g:W\rightarrow V$ be the 
+    $\langle W, \oplus \rangle$ by Theorem 3. Let $g:W\rightarrow V$ be the 
     function $g(w) = T^{-1}(w)$ for all $w\in W$. We know 
     that this inverse homomorphism exists because $T$ is a group 
     isomorphism. Then, $g$ is the inverse 
@@ -232,10 +316,239 @@ We can generalize this to linear transformations quite nicely as well.
     we know that $T$ must be bijective\footnote[4]{
       It suffices to say that $T$ is bijective because it has a defined inverse. The 
       proof for this statement is elementary, and is left as an exercise for the reader 
-      in order to keep this proof short both short and on topic.
+      in order to keep this proof both short and on topic.
     } because it has a defined inverse for all $w\in W$.
+  \end{enumerate}   
+\done
+\end{proof}
+
+\paragraph*{} By now, we've laid the general groundwork for group theory. We've seen
+connections to vector spaces, linear transformations, subspaces, and more. In the way
+that linear algebra provides the tools to study abstract vector spaces for plenty 
+of applications, the same is true for group theory. In the next section, we will see
+how group theory can be used to study symmetry, in both abstract mathematical terms 
+and in the context of physical systems! 
+
+\section{Groups of Functions, Symmetry, and Group Actions}
+\paragraph*{} We have seen how vector spaces can satisfy the group axioms, so a natural 
+area of inquiry might be to dig further into the connection between these objects. 
+For example, instead of investigating questions about groups directly, might we instead 
+be able to study some equivalent vector space / linear algebraic object and then leverage 
+the tools that we have been studying this semester to answer our original question? As 
+it turns out this is indeed possible. For the purposes of this paper (and simplicity) 
+feel free to assume the relevant objects are finite linear groups. 
+
+\paragraph*{} To find the explicit connection we will first introduce the notion of 
+\textbf{group actions} in the context of vector spaces. Suppose we have a real vector space 
+$V=\langle \R^n,K,+,\cdot\rangle$, and the 
+set of $n$ x $n$ invertible matrices\footnote[5]{Typically, $M_{n\text{x}n}$ denotes the set of all $n$x$n$ matrices, but we will
+use this notation to denote the set of invertible matrices for simplicity 
+and because we will not use non-invertible matrices in this paper.
+}, $M_{n\text{x}n}$, in that space.
+This set of matrices is known as the \textbf{general linear group} of $V$, GL($V$),
+and is indeed a group under matrix multiplication as the binary operator.
+\begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
+  \textbf{Theorem 5:} The set of $n$ x $n$ invertible matrices, $M_{n\text{x}n}$, in
+  $\R^n$ forms a group under matrix multiplication as the binary operator, written 
+  $\langle M_{n\text{x}n}, \circ\rangle$.
+\end{mdframed}
+\begin{proof}
+  We will prove this by showing that $M_{n\text{x}n}$ is closed under matrix multiplication, 
+  that the identity matrix is an identity element, and that the inverse of a matrix is 
+  indeed its inverse. 
+  \begin{enumerate}
+    \item $M_{n\text{x}n}$ is closed under matrix multiplication. 
+    Let $A,B\in M_{n\text{x}n}$. Then, $A$ and $B$ are invertible $n$ x $n$ matrices. 
+    Then, det$(A) \neq 0$ and det$(B) \neq 0$ by the IMT. Because det($AB$)=det$(A)$det$(B)$,
+    we know that the matrix $AB$ does not have a zero determinant, so it is invertible.
+    Then, $AB\in M_{n\text{x}n}$.
+
+    \item The identity matrix is an identity element. 
+    Let $A\in M_{n\text{x}n}$. Because $AI_n=A$ and $I_nA=A$, we know that $I_n$
+    is an identity element for $M_{n\text{x}n}$. 
+
+    \item The inverse of a matrix is its inverse group element.  
+    Let $A\in M_{n\text{x}n}$. Then, $A$ is an invertible $n$ x $n$ matrix. 
+    Then, $A^{-1}$ is also an invertible $n$ x $n$ matrix. Because $AA^{-1}=I_n$,
+    we know that for all $A\in M_{n\text{x}n}$ there exists an $A^{-1}$ such that $AA^{-1}=I_n$.
   \end{enumerate}
+  Thus, $M_{n\text{x}n}$ is a group under matrix multiplication as the binary operator.
 \done 
 \end{proof}
+
+\paragraph*{} This may seem trivial, but recognize how this is different from our 
+previous examples of groups. Matrices as we know them are not only objects, 
+but linear transformations themselves. This opens the door for not only studying 
+groups of objects like vectors, but also for bijective functions, in this example 
+over vector spaces. Additionally, consider that matrix multiplication is simply 
+the composition of matrices. Thus, we can think of the group of matrices as a
+group of functions (linear transformations), with the binary operator of 
+function composition over a certain domain. 
+
+\paragraph*{} With it in mind that groups can take the form of sets of functions 
+and transformations over vector spaces, consider how we could extend this to 
+other domains besides vector spaces. Additionally, consider how these matrices 
+are all invertible, and preserve the structure of the vector space. This is an 
+important property, and is highly related to the notion of symmetry when 
+groups like these are extended to physical systems. 
+
+\paragraph*{} This idea is important, so consider the example of
+a square (consider the location of its vertices, sides, or any defining property
+to be our domain). If you were to rotate that square by 90 degrees, it would look exactly the 
+same. Its vertices may be in different locations, but they were mapped to each other 
+in a such a way that the structure we care about preserving (square-ness) is kept 
+intact. Also, notice that there are many different symmetries that one could exploit 
+to perform a symmetric action, such as flipping the square over. Because of the 
+nature of a “symmetric operation”, 
+whenever one considers the set of symmetric operations on an object, there is an 
+identity element, an inverse, and the binary operator of composition. The underlying structure always looks 
+the same from these operations, so composing symmetric operations will also produce the same structure, 
+so the set of symmetric operations is closed under composition, which makes 
+the set of symmetric operations a group, known as a \textbf{symmetry group}.
+
+\paragraph*{Definition 6:} A \textbf{symmetry group} of an object $X$ is a
+group $G$ of transformations of $X$ that preserves the structure of $X$ with 
+the binary operator of composition. It is commonly denoted as $G=\text{Sym}(X)$.
+
+\paragraph*{} The upshot is this: groups have a deep connection to symmetry, and 
+\textbf{group actions} acting on a set are homomorphisms from a given group into
+the group of transformations of that set. 
+When we can perform group actions on a vector space $V$, we 
+can often map group elements to subgroups of GL($V$), allowing us to use linear algebra.
+We now formalize what we mean by a `group action'.
+
+\paragraph{\textbf{Definition N:}} If $G$ is a group with identity element
+$\epsilon$ and $X$ is a set, then a function \\ $\alpha: G \times X  \rightarrow X$
+is a \textbf{group action} if it satisfies the following two axioms:
+ \begin{enumerate}
+  \item $\text{Identity:} \: \alpha(\epsilon, x) = x \text{ for all } x \in X$ 
+  \item  $\text{Compatability:} \: \alpha(g, \alpha(h,x)) = \alpha(gh, x) \text{ for all } x \in X$
+ \end{enumerate}
+
+
+\paragraph*{} Remember that we have 3 objects under consideration. Group $G$, the 
+set of automorphism (or equivalently, symmetries) of $X$, denoted Sym($X$), and $X$ itself. As 
+elements in $G$ correspond to symmetry operations of $X$. We interpret $\alpha(g, x)\: 
+\text{where} \: g \in G, x \in X$ as outputting where the symmetry operation 
+corresponding to element $g$ takes element $x$ when applied to set $X$. Back in the 
+square example, $X$ would the set of vertices, $x$ would be the top right vertex, and 
+$g$ would correspond to, for example, a $\ 90^{\circ}$ clockwise rotation, and 
+$\alpha(g, x)$ would output the bottom right vertex.
+
+% reference for Cayley's theorem?
+\paragraph*{} While the linear case of group actions may not always apply, 
+Cayley's theorem tells us that every group is isomorphic to a subgroup of some 
+symmetric group (though this may be trivial, such as the identity symmetry group 
+and or a permutation group of the group itself). \\
+\textbf{Proof:} Later sorry :/
+
+\section{Representations}
+\paragraph*{} Now that we have done the groundwork we are ready to make 
+explicit this intuitive connection between groups and vector spaces using 
+\textbf{Representation Theory}. A \textbf{representation} is a group action onto GL($V$), 
+where $V$ is a vector space. The elements of a group are mapped to invertible 
+matrices in this case. 
+
+\textbf{Definition N + 1:} A \textbf{representation} of group $G$ on a vector space 
+$V$ over field $K$, is a group homomorphism from $G$ to GL($V$), $\rho: G \rightarrow GL(V)$ 
+such that $\rho(g, h) = \rho(gh)$ 
+
+\paragraph*{} We've been a bit abstract so lets look at an example of a group, 
+and show how one might generate such a representation. Lets consider an equilateral 
+triangle as our object, and its corners the elements we are tracking. It turns out 
+that (including the do-nothing identity) there are 6 symmetry operations we can 
+perform to leave the triangle looking the same. For now lets just consider the 
+clockwise ${120}^{\circ}$ rotation, denoted as $q$. This is notational abuse, as given 
+our previous description, $q$ should be an element of a group we are mapping to the 
+set of symmetry operations. 
+% make clear why we use this abuse of notation
+In any case, we want to find an invertible matrix 
+that captures what this element $q$ does. That ought to sound familiar. When we wanted 
+to find a matrix for a linear function, we looked at where it took our basis 
+vectors - so let's choose a basis corresponding to the elements we are tracking. 
+Let $t$, $l$, $r$ correspond to the top, left, and right vertex respectively. 
+\[
+t = 
+\begin{bmatrix}
+1 \\
+0 \\
+0 \\
+\end{bmatrix}, \;
+l = 
+\begin{bmatrix}
+0 \\
+1 \\
+0 \\
+\end{bmatrix}, \;
+r = 
+\begin{bmatrix}
+0 \\
+0 \\
+1 \\
+\end{bmatrix}
+\] 
+\paragraph*{}  Note that the standard basis was chosen merely for convience, 
+and any basis could function equivalently (this will come up a bit later). 
+Now let's observe where $q \cdot q$, $l$, and $r$ takes our basis vectors. As a 
+reminder, $q$ is a ${120}^{\circ}$. rotation. For simplicity sake we shorten 
+$\rho(q, x)\: \text{to} \: q \cdot x$
+\[
+q \cdot t = 
+\begin{bmatrix}
+0 \\
+0 \\
+1 \\
+\end{bmatrix}, \;
+q \cdot l = 
+\begin{bmatrix}
+1 \\
+0 \\
+0 \\
+\end{bmatrix}, \;
+q \cdot r = 
+\begin{bmatrix}
+0 \\
+1 \\
+0 \\
+\end{bmatrix}
+\]
+\paragraph*{} So, just as we have done in class we can, with respect to our chosen basis, write an explicit matrix for $q$.
+\[
+q = 
+\begin{bmatrix}
+0 & 1 & 0 \\ 
+0 & 0 & 1 \\
+1 & 0 & 0 \\
+\end{bmatrix}
+\]
+\paragraph*{}  In many applications of group theory, for example in chemistry, we may 
+be interested in the "simplest possible" representation of a group. We call these 
+representations irreducible (sometimes called irreps). Helpful for intuition is the 
+% i would recommend using notation from the beginning for defining groups
+% also, this definition is a bit unclear
+notion of \textbf{orbits}, where an orbit of an element $x$ of set $X$ under group $G$ is 
+just all elements in $X$ that can be mapped to (or from, by definition) $x$. It is sort of 
+like its own little world within the bigger world of $X$. A similar idea applies to 
+representations, where of course we are working with vector spaces instead of general 
+sets. Here the elements being acted upon by the group are vectors, and sets of those 
+vectors where every vector is mapped onto another in the set by the operations in $G$
+% G is a group with one operation, not a set of operations, so maybe make clear that 
+% that operation is composition of other operations 
+would form an orbit. 
+
+\textbf{Definition N + 2:} Let $\rho: G \rightarrow GL(V)$ be a representation. A 
+$G$-invariant subspace $W$ is a subspace of $V$ such that for all $w \in W$ and 
+$g \in G$, $g \cdot w \in W$. If we restrict the representation to just $W$ then 
+$W$ forms a \textbf{sub-representation} of $V$, and thus $V$ would not be irreducible.
+
+\textbf{Definition N + 3:} An irreducible representation $V$ is one with only trivial 
+subrepresentations (0, and $V$). 
+
+\paragraph*{}  Didn't have time to finish, but to spoil the ending, the notion 
+of eigenvectors comes into play here.
+
+\newpage
+\nocite{*}
+\printbibliography
 
 \end{document}
