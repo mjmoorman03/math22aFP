@@ -9,7 +9,9 @@
 \let\marvosymLightning\Lightning
 \usepackage{amssymb}
 \usepackage{lastpage}
-\usepackage[backend=bibtex,style=numeric]{biblatex}
+\usepackage{biblatex}
+\usepackage{hyperref}
+\usepackage{setspace}
 \usepackage{csquotes}
 \usepackage{fancyhdr}
 \usepackage[dvipsnames]{xcolor}
@@ -28,6 +30,14 @@
 }{%
   \end{array}\right]
 }
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
 
 \title{\textbf{A Swift Introduction to Group Theory}}
 \author{Cade McManus, Michael Moorman}
@@ -46,10 +56,12 @@
 \pagenumbering{arabic}
 \fancyfoot[C]{\thepage\ }
 
+\begin{spacing}{1.25}    
 
 \maketitle
 
 \section{Introduction}
+
 
 \paragraph*{} The question ``When will I ever use this?'' is one that is likely 
 most frequently asked in the math classroom and in the context of mathematics 
@@ -61,9 +73,31 @@ in this paper,
 another seemingly abstract mathematical concept? The answer is that group theory
 itself is a powerful tool that can be used to study the natural world in a 
 mathematical, but still intuitive way. In this paper, we will explore the
-fundamental ideas of group theory and how they can be applied to the real world,
+fundamental ideas of group theory and how they can be applied to the real world
+and other branches of mathematics,
 both for the sake of understanding the world around us and for the sake of
 exploring math beyond 22a for the sake of math itself. 
+
+\paragraph*{} Throughout this paper, we will explore the basics of group theory,
+how vector spaces, subspaces, and linear transformations relate to groups, and 
+then examine how these ideas in group theory can be used to gain insight into 
+and study all sorts of mathematical objects and spaces that have an underlying
+symmetric structure to them. Group theory is very useful for studying 
+these types of symmetric structures, and we seek to give the reader an intuition
+for them and a basis from which to understand and study these structures. 
+
+\paragraph*{} With this is mind, it is important to know that
+our main goal is not to demonstrate some specific theorem about symmetry in its application to chemistry or something
+of the sort, but rather to build the tools to approach problems like these. Therefore, many of the theorems proved
+in this paper do not necessarily build towards some final
+theorem, but are instead used to connect group theory to
+linear algebra in a meaningful way. The effect of this
+is to allow the reader to understand this new material 
+because of the similarities to linear algebra that the reader ought to be familiar with already. As an example of this, Theorem 4 is not used later in the paper, but rather 
+connects the idea of subgroups to subspaces of a vector space,
+in order to allow the reader to meaningfully build intuition
+and understanding for the idea of subgroups, rather than
+simply being given the definition. 
 
 \section{What is Group Theory?}
 
@@ -91,7 +125,7 @@ is meant to convey that $a$ is an element in the underlying set of the group $G$
 
 Additionally, another special type of group we will see is an \textbf{abelian group}.
 
-\textbf{Definition 2:} An \textbf{abelian group} is a group $\langle V, \cdot \rangle$
+\paragraph{\textbf{Definition 2:}} An \textbf{abelian group} is a group $\langle V, \cdot \rangle$
 such that for all $u,v \in V$, $u\cdot v = v\cdot u$. This means that our group operation 
 is commutative, and the order in which we add elements does not matter.
 
@@ -210,7 +244,7 @@ are so similar that there exists a very nice continuation of Theorem 1 with
 regard to subgroups.
 
 \begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
-  \textbf{Theorem 2:} Let $B=\langle W,K,+,\cdot\rangle$ be a supspace of 
+  \textbf{Theorem 2:} Let $B=\langle W,K,+,\cdot\rangle$ be a subspace of 
     vector space $A=\langle V,K,+,\cdot\rangle$. Then, $S=\langle W,+ \rangle$ is a subgroup of
     $G=\langle V,+ \rangle$.
 \end{mdframed}
@@ -398,13 +432,29 @@ to be our domain). If you were to rotate that square by 90 degrees, it would loo
 same. Its vertices may be in different locations, but they were mapped to each other 
 in a such a way that the structure we care about preserving (square-ness) is kept 
 intact. Also, notice that there are many different symmetries that one could exploit 
-to perform a symmetric action, such as flipping the square over. Because of the 
-nature of a “symmetric operation”, 
-whenever one considers the set of symmetric operations on an object, there is an 
-identity element, an inverse, and the binary operator of composition. The underlying structure always looks 
-the same from these operations, so composing symmetric operations will also produce the same structure, 
-so the set of symmetric operations is closed under composition, which makes 
-the set of symmetric operations a group, known as a \textbf{symmetry group}.
+to perform a symmetric action, such as flipping the square over. 
+We've kept things intuitive so far, but lets make our terminology a bit more precise.
+
+\paragraph*{Definition 5:} A \textbf{symmetry operation} on some object $X$ is an automorphism, that is, an ismorphism  $\beta: X \rightarrow X$.
+\begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
+  \textbf{Theorem 6:} Let Sym($X$) be the set of symmetry operations of $X$, then Sym($X$) under composition is a 
+  \textbf{symmetric group}.
+\end{mdframed}
+\begin{proof}
+Associativity: In \textit{How to Prove it, a Structured Approach} on page 176 they show that function composition
+is always associative. This is a known result and we leave its verification to the reader.\\
+Identity: We let our identity operation be the automorphism that maps every element of $X$ to itself, and denote this
+$e$. Then for arbitrary $g \in \text{Sym}(X), (g \circ e)(X) = g(x)$, as doing nothing to $X$ and then applying $g$
+should be exactly the same as just applying $g$.  \\
+Inverses: By the definition of symmetry operation, for all $g \in \text{Sym}(X)$, $g$ is a bijective endomorphism (map from $X$ to itself), which means its inverse operation exists and is also an element in Sym($X$). Thus
+$(g \circ g^{-1})(x) = e(x)$ as applying a function, and then undoing the function is the same as doing nothing.\\
+Closure: We will show closure by showing that composition of arbitrary elements of Sym($X$), $g, h \in \text{Sym}(X)$
+must also be an automorphism from $X$ to $X$. As $g$ and $h$ map $X$ to itself, their composition must also do this, so 
+$g \circ h$ is an endomorphism from $X$ to $X$. We also know this endomorphism is bijective as we have inverse composition $h^{-1} \circ g^{-1}$ such that $ (h^{-1} \circ g^{-1})(g \circ h)(x) = x$ for all $x \in X$. Thus we find
+that every composition is an automorphism, and thus also an element of Sym($X$). \\
+As all group conditions are satisfied, the set of automorphisms of object $X$ form a group.
+\done 
+\end{proof}
 
 \paragraph*{Definition 6:} A \textbf{symmetry group} of an object $X$ is a
 group $G$ of transformations of $X$ that preserves the structure of $X$ with 
@@ -417,7 +467,7 @@ When we can perform group actions on a vector space $V$, we
 can often map group elements to subgroups of GL($V$), allowing us to use linear algebra.
 We now formalize what we mean by a `group action'.
 
-\paragraph{\textbf{Definition N:}} If $G$ is a group with identity element
+\paragraph{\textbf{Definition 7:}} If $G$ is a group with identity element
 $\epsilon$ and $X$ is a set, then a function \\ $\alpha: G \times X  \rightarrow X$
 is a \textbf{group action} if it satisfies the following two axioms:
  \begin{enumerate}
@@ -426,21 +476,48 @@ is a \textbf{group action} if it satisfies the following two axioms:
  \end{enumerate}
 
 
-\paragraph*{} Remember that we have 3 objects under consideration. Group $G$, the 
-set of automorphism (or equivalently, symmetries) of $X$, denoted Sym($X$), and $X$ itself. As 
-elements in $G$ correspond to symmetry operations of $X$. We interpret $\alpha(g, x)\: 
-\text{where} \: g \in G, x \in X$ as outputting where the symmetry operation 
-corresponding to element $g$ takes element $x$ when applied to set $X$. Back in the 
-square example, $X$ would the set of vertices, $x$ would be the top right vertex, and 
-$g$ would correspond to, for example, a $\ 90^{\circ}$ clockwise rotation, and 
+\paragraph*{} Remember that we have 3 objects under consideration. A group $G$ with some underlying set, a set $X$, and the symmetry group of $X$, $\text{Sym}(X)$. Elements in $G$ can be mapped via the
+group action injectively but not necessarily surjectively into $\text{Sym}(X)$, however, if we 
+look only at the subgroup formed by the range of $\alpha$ then $\alpha$ is an ismorphism.
+We interpret $\alpha(g, x)\: 
+(\text{where} \: g \in G, x \in X)$ as first mapping g to some symmetry operation of $X$, and then
+mapping x according to that symmetry operation. Back in the 
+square example, $X$ would be  the set of vertices, $x$ would be the top right vertex, and 
+$g$ would be mapped to, for example, the symmetry operation of $\ 90^{\circ}$ clockwise rotation, and 
 $\alpha(g, x)$ would output the bottom right vertex.
 
 % reference for Cayley's theorem?
 \paragraph*{} While the linear case of group actions may not always apply, 
 Cayley's theorem tells us that every group is isomorphic to a subgroup of some 
-symmetric group (though this may be trivial, such as the identity symmetry group 
-and or a permutation group of the group itself). \\
-\textbf{Proof:} Later sorry :/
+symmetric group.
+
+\begin{mdframed}[roundcorner=10pt, backgroundcolor=gray!10]
+    \textbf{Theorem 7:} Every group is \textbf{isomorphic} to a subgroup of a \textbf{symmetric group}.
+\end{mdframed}
+\begin{proof}
+Suppose group $\langle G, * \rangle$, the set of permutations of $G, P = \{\lambda_g:G \rightarrow G : g \in G\}$ 
+where $\lambda_g(x) = g * x$, and the map $\rho:G \rightarrow P$. We will prove the P is a symmetry group under composition, and then that $\rho$ is a homomorphism and is also bijective. \\
+Sub Claim: P is a symmetry group \\
+Injectivity: For arbitrary $g \in G$, suppose $\lambda_g(x) = \lambda_g(y)$. Then $g * x = g * y$. As G is a group we can
+left multiply by $g^{-1}$ and find that $g^{-1} * g * x = g^{-1} * g * y \rightarrow x = y$, so $\lambda$ is injective.
+Surjectivity: Suppose arbitrary $g, h \in G$. As G is a group we know $(g^{-1} * h) \in G$, so
+$\lambda_g(g^{-1}*h) = g * g^{-1} * h = h$, so for an arbitrary element in the codomain of $\lambda_g$ there is an 
+element in the domain that is mapped to it, so $\lambda$ is surjective. \\
+As the $\lambda_g$ is injective and surjective it is also bijective. As $g$ was arbitrary all elements of P are
+bijective. Then $P$ is the set of symmetry operations of $G$, so $P$ = Sym($G$), which by our earlier theorem form a 
+symmetric group under composition. \\
+\textbf{Lemma:} $\rho$ is a homomophism that is bijective. \\
+Homomorphism: \begin{equation}
+    \rho(g * h)(x) = \lambda_{g * h}(x) = g * (h * x) = \lambda_g(h * x) = (\lambda_g \circ \lambda_h)(x) =
+    (\rho(g)\circ\rho(h))(x)
+\end{equation} \\
+Surjectivity: For arbitrary $\lambda_g$, $\rho(g) = \lambda_g$, so the function is surjective. \\
+Injective: Suppose $\lambda_g(x) = \lambda_h(x)$. Then for all $x \in G$ then functions are equal, in particular,
+$\lambda_g(e) = \lambda_h(e) \rightarrow g*e = h*e \rightarrow g = h$. So the function is injective. \\
+As $\rho$ is surjective, injective, and a group homomorphism, it is an isomorphism to a symmetric group,
+as required.
+\done
+\end{proof}
 
 \section{Representations}
 \paragraph*{} Now that we have done the groundwork we are ready to make 
@@ -449,22 +526,22 @@ explicit this intuitive connection between groups and vector spaces using
 where $V$ is a vector space. The elements of a group are mapped to invertible 
 matrices in this case. 
 
-\textbf{Definition N + 1:} A \textbf{representation} of group $G$ on a vector space 
-$V$ over field $K$, is a group homomorphism from $G$ to GL($V$), $\rho: G \rightarrow GL(V)$ 
-such that $\rho(g, h) = \rho(gh)$ 
+\textbf{Definition 8:} A \textbf{representation} of group $G$ on a vector space 
+$V$ over field $K$ is a group homomorphism $\rho: G \rightarrow GL(V)$ 
+such that $\rho(g, h) = \rho(gh)$ for $g,h\in G$.
 
-\paragraph*{} We've been a bit abstract so lets look at an example of a group, 
+\paragraph*{} We've been a bit abstract, so let's look at an example of a group, 
 and show how one might generate such a representation. Lets consider an equilateral 
 triangle as our object, and its corners the elements we are tracking. It turns out 
-that (including the do-nothing identity) there are 6 symmetry operations we can 
-perform to leave the triangle looking the same. For now lets just consider the 
+that there are 6 symmetry operations (including the do-nothing identity) we can 
+perform to leave the triangle looking the same. For now, consider the 
 clockwise ${120}^{\circ}$ rotation, denoted as $q$. This is notational abuse, as given 
 our previous description, $q$ should be an element of a group we are mapping to the 
 set of symmetry operations. 
 % make clear why we use this abuse of notation
 In any case, we want to find an invertible matrix 
 that captures what this element $q$ does. That ought to sound familiar. When we wanted 
-to find a matrix for a linear function, we looked at where it took our basis 
+to find a matrix for a linear transformation, we looked at where it took our basis 
 vectors - so let's choose a basis corresponding to the elements we are tracking. 
 Let $t$, $l$, $r$ correspond to the top, left, and right vertex respectively. 
 \[
@@ -487,11 +564,15 @@ r =
 1 \\
 \end{bmatrix}
 \] 
-\paragraph*{}  Note that the standard basis was chosen merely for convience, 
-and any basis could function equivalently (this will come up a bit later). 
-Now let's observe where $q \cdot q$, $l$, and $r$ takes our basis vectors. As a 
+\paragraph*{}  Note that the standard basis was chosen merely for convenience, 
+and any basis could function equivalently (this will come up a bit later). These vectors would look like this in $\R^3$:
+\begin{center}
+  \includegraphics[scale=0.35]{images/first.png}  
+\end{center}
+    
+Now let's observe where $q \cdot t$, $q\cdot l$, and $q \cdot r$ take our basis vectors. As a 
 reminder, $q$ is a ${120}^{\circ}$. rotation. For simplicity sake we shorten 
-$\rho(q, x)\: \text{to} \: q \cdot x$
+$\rho(q, x)\: \text{to} \: q \cdot x$.
 \[
 q \cdot t = 
 \begin{bmatrix}
@@ -512,6 +593,13 @@ q \cdot r =
 0 \\
 \end{bmatrix}
 \]
+
+These can be visualized as well, and by tracking the colors, it can be seen that these vectors have each moved, completing a 120 degree rotation of the resultant triangle formed from their endpoints when drawn from the origin. 
+
+\begin{center}
+  \includegraphics[scale=0.35]{images/second.png}  
+\end{center}
+
 \paragraph*{} So, just as we have done in class we can, with respect to our chosen basis, write an explicit matrix for $q$.
 \[
 q = 
@@ -521,34 +609,58 @@ q =
 1 & 0 & 0 \\
 \end{bmatrix}
 \]
-\paragraph*{}  In many applications of group theory, for example in chemistry, we may 
-be interested in the "simplest possible" representation of a group. We call these 
-representations irreducible (sometimes called irreps). Helpful for intuition is the 
-% i would recommend using notation from the beginning for defining groups
-% also, this definition is a bit unclear
-notion of \textbf{orbits}, where an orbit of an element $x$ of set $X$ under group $G$ is 
-just all elements in $X$ that can be mapped to (or from, by definition) $x$. It is sort of 
-like its own little world within the bigger world of $X$. A similar idea applies to 
-representations, where of course we are working with vector spaces instead of general 
-sets. Here the elements being acted upon by the group are vectors, and sets of those 
-vectors where every vector is mapped onto another in the set by the operations in $G$
-% G is a group with one operation, not a set of operations, so maybe make clear that 
-% that operation is composition of other operations 
-would form an orbit. 
 
-\textbf{Definition N + 2:} Let $\rho: G \rightarrow GL(V)$ be a representation. A 
-$G$-invariant subspace $W$ is a subspace of $V$ such that for all $w \in W$ and 
-$g \in G$, $g \cdot w \in W$. If we restrict the representation to just $W$ then 
-$W$ forms a \textbf{sub-representation} of $V$, and thus $V$ would not be irreducible.
+\paragraph*{}  This sort of representation may seem specific,
+but consider how many different symmetrical operations this method could represent. For example, could you come up with some way to represent the operation of flipping the triangle 
+in some way?
 
-\textbf{Definition N + 3:} An irreducible representation $V$ is one with only trivial 
-subrepresentations (0, and $V$). 
+You might have noticed that a different choice of basis could lead to significantly different
+representations for the same operations. Intuitively, though, choosing a different basis shouldn't
+change anything fundamental about the information we want our representation to hold. We've encountered a similar problem in class, when our linear transformations
+looked quite different upon first inspection, but actually could be connected with just a change of basis. A similar idea can be applied here.
+\paragraph{Definition 9:} A \textbf{homomorphism} between two representations ($\lambda_w, W)$ and $(\lambda_v, V)$ under group G, is the map
+ $\lambda:V \rightarrow W$ where 
+$\lambda\circ\lambda_v(g) = \lambda_w(g)\circ\lambda$ for all.
+\paragraph{Definition 10:} Two representations are \textbf{isomorphic} if there is an invertible representation homomorphism $\lambda:V \rightarrow W$
+, such that $\lambda_v = \lambda^{-1}\circ\lambda_w\circ\lambda$
 
-\paragraph*{}  Didn't have time to finish, but to spoil the ending, the notion 
-of eigenvectors comes into play here.
+\paragraph{}So as it turns out, our change of basis is irrelevant up to isomorphism between representations! Now, this only scratches 
+the surface of representation theory (and its nice connections to our classwork), but given the scope of this paper lets pause here and briefly look at some 
+real life applications of representation theory.
+
+\paragraph{} A classic application of group theory in the real world is in chemistry, through something called
+Molecular Orbital theory. Roughly speaking, the problem at hand is predicting the properties of molecules
+without directly performing experiments. This is especially hard when molecules oscillate between many structures. As it turns out, these oscillations are "symmetry preserving" and also often change properties of the molecules in
+predictable ways, and can thus be modeled as group actions.
+Then, they can be meaningfully modeled by representations 
+as matrices, which allows the properties of these oscillations to be easily studied and understood, as well
+as simulated easily by a computer. 
+
+\section{Conclusion}
+
+\paragraph*{}  In this paper we have shown that groups are intimately related to
+vector spaces, and that this relationship can be made explicit using representation
+theory. We have also shown that the notion of irreducible representations is a
+useful tool for understanding the structure of groups. 
+
+With the study of linear algebra and abstract vector spaces, we have seen 
+in class how it can be applied to many different scenarios where the generalizations 
+linear algebra provides can be extremely useful. This is also the case for 
+the extension of group theory and representation theory. Not only can we study 
+symmetric structures using group theory, but we can also apply what we've learned 
+throughout this semester in linear algebra to these structures. While this paper 
+may have been a bit abstract, the hope is that it has given the reader the basic 
+tools to approach all sorts of future problems, whether abstract or concrete. 
+
+\paragraph*{} Additionally, for those interested in how Rubik's cubes relate to group theory, an interesting 
+(but sufficiently challenging) paper written by Harvard's own Janet Chen can be found
+\href{https://people.math.harvard.edu/~jjchen/docs/Group%20Theory%20and%20the%20Rubik's%20Cube.pdf}{here}.
+
 
 \newpage
+
 \nocite{*}
 \printbibliography
+\end{spacing}
 
 \end{document}
